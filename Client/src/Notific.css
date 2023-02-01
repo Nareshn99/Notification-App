@@ -2,24 +2,37 @@
     padding: 10px;
     flex: auto;
     margin: auto;
-    background-color: rgb(98, 93, 93);
+    background-color: rgb(139, 138, 67);
     text-align: center;
     border: 2px solid rgb(240, 229, 24);
     border-radius: 10px;
     height: auto;
-    width: 250px;
+    width: 470px;
 }
+.cont{
+    padding: 10px;
+    flex: auto;
+    margin: auto;
+    background-color: rgb(246, 167, 82);
+    text-align: center;
+    border: 2px solid rgb(240, 229, 24);
+    border-radius: 10px;
+    height: auto;
+    width: 470px;
+}
+
+
 
 h3{
     text-align: center;
-    color: rgb(242, 145, 34);
+    color: rgb(248, 250, 248);
 }
 
 input{
     padding: 7px;
     margin: 25px;
     width: 70%;
-    border:1px solid red;
+    border:1px solid rgb(248, 27, 7);
     border-radius: 5px;
 }
 

@@ -3,10 +3,14 @@ const mongoose = require('mongoose');
 const app = express();
 let http = require('http');
 const { Server } = require('socket.io');
+
 const amqp = require('amqplib/callback_api');
+
 const cors = require('cors');
 app.use(cors());
+
 const route = require("./src/route");
+
 app.use(express.json())
 
 mongoose.connect("mongodb+srv://priyanka99:EorbzmKpqdV7ml9W@cluster0.puozp1a.mongodb.net/notificationUser", {
@@ -40,19 +44,22 @@ io.on("connection", (socket) => {
         throw err1
       }
 
-      let queue = 'basicMarketing';
-      channel.assertQueue(queue);
+      const pushQueue = 'pushInBasikMarketing';
+      const pullQueue = 'pullfromBasikMarketing'
+     
+      channel.assertQueue(pushQueue);
+      channel.assertQueue(pullQueue);
 
       socket.on("join_room", (data) => {
         socket.join(data);
       });
 
       socket.on("send_message", (data) => {
-        channel.sendToQueue(queue, Buffer.from(JSON.stringify(data)))
+        channel.sendToQueue(pushQueue, Buffer.from(JSON.stringify(data)))
 
-        channel.consume(queue, (message) => {
+        channel.consume(pullQueue, (message) => {
           const data = JSON.parse(message.content.toString())
-          if(data.room)socket.to(data.room).emit("receive_message", data);
+          socket.to(data.room).emit("receive_message", data);
         }, { noAck: true })
 
       })

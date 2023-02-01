@@ -27,7 +27,7 @@ function NotificPage() {
     }, [socket]);
 
   return (
-    <div className="controller">
+    <div className="cont">
       <h1>Notification System </h1>
       <h3>WelCome {name}</h3>
       <div className="sub-con">
